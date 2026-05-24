@@ -5,7 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hearthgrove • Survival SMP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=Playfair+Display:wght@700&amp;display=swap');
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .heading {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+        }
+
+        .v2-card {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .v2-card:hover {
+            transform: translateY(-15px) scale(1.03);
+        }
+
+        #loader {
+            animation: fadeOut 0.6s ease forwards;
+            animation-delay: 1.6s;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+    </style>
 </head>
 <body class="bg-[#0f1a14] text-white">
 
@@ -38,21 +70,21 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 px-6 max-w-5xl">
                 
                 <a href="https://discord.gg/Hfjed7YJQt" target="_blank" 
-                   class="bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-8 text-center hover:-translate-y-2 transition-all cursor-pointer">
+                   class="v2-card bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-8 text-center hover:-translate-y-2 transition-all cursor-pointer">
                     <div class="w-20 h-20 bg-[#5865F2] rounded-2xl mx-auto flex items-center justify-center mb-5">
                         <i class="fa-brands fa-discord text-white text-5xl"></i>
                     </div>
                     <div class="text-2xl font-bold">Discord</div>
                 </a>
 
-                <a href="#" class="bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-8 text-center hover:-translate-y-2 transition-all cursor-pointer">
+                <a href="#" class="v2-card bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-8 text-center hover:-translate-y-2 transition-all cursor-pointer">
                     <div class="w-20 h-20 bg-[#E8B86D] rounded-2xl mx-auto flex items-center justify-center mb-5">
                         <i class="fa-solid fa-vote-yea text-[#1a2f1f] text-5xl"></i>
                     </div>
                     <div class="text-2xl font-bold">Vote</div>
                 </a>
 
-                <a href="#" class="bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-8 text-center hover:-translate-y-2 transition-all cursor-pointer">
+                <a href="#" class="v2-card bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-8 text-center hover:-translate-y-2 transition-all cursor-pointer">
                     <div class="w-20 h-20 bg-[#3a4a3a] rounded-2xl mx-auto flex items-center justify-center mb-5">
                         <i class="fa-solid fa-calendar text-[#E8B86D] text-5xl"></i>
                     </div>
@@ -85,21 +117,18 @@
                 </div>
 
                 <div class="grid md:grid-cols-3 gap-6">
-                    <!-- Update 1 -->
                     <div class="bg-[#1a2f1f] p-8 rounded-3xl border border-[#3a4a3a]">
                         <div class="text-[#E8B86D] text-sm mb-2">May 20, 2026</div>
                         <div class="text-xl font-semibold mb-3">New Cherry Grove Biome Added</div>
                         <div class="text-[#a8b9aa]">We added a beautiful new cherry grove biome with custom trees and flowers.</div>
                     </div>
 
-                    <!-- Update 2 -->
                     <div class="bg-[#1a2f1f] p-8 rounded-3xl border border-[#3a4a3a]">
                         <div class="text-[#E8B86D] text-sm mb-2">May 15, 2026</div>
                         <div class="text-xl font-semibold mb-3">Weekly Build Contest #4</div>
                         <div class="text-[#a8b9aa]">This week's theme is "Cozy Cabin". Join the contest on Discord!</div>
                     </div>
 
-                    <!-- Update 3 -->
                     <div class="bg-[#1a2f1f] p-8 rounded-3xl border border-[#3a4a3a]">
                         <div class="text-[#E8B86D] text-sm mb-2">May 10, 2026</div>
                         <div class="text-xl font-semibold mb-3">Server Performance Improved</div>
@@ -162,6 +191,35 @@
         <span>IP copied to clipboard!</span>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Loading Screen
+        window.onload = function () {
+            const loader = document.getElementById('loader');
+            const content = document.getElementById('content');
+
+            setTimeout(() => {
+                content.style.transition = 'opacity 0.7s ease';
+                content.style.opacity = '1';
+            }, 1700);
+        };
+
+        // Copy IP Function
+        function copyIP() {
+            const ip = "hg.dg.vg";
+            navigator.clipboard.writeText(ip).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('hidden');
+                toast.classList.add('flex');
+
+                setTimeout(() => {
+                    toast.classList.remove('flex');
+                    toast.classList.add('hidden');
+                }, 2200);
+            }).catch(() => {
+                prompt("Copy this IP:", ip);
+            });
+        }
+    </script>
+
 </body>
 </html>

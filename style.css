@@ -1,14 +1,15 @@
-.v2-card {
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+body {
+    font-family: 'Inter', system-ui, sans-serif;
 }
 
-.v2-card:hover {
-    transform: translateY(-18px) scale(1.03);
-    box-shadow: 0 30px 60px -15px rgba(232, 184, 109, 0.3);
+#loader {
+    animation: fadeOut 0.6s ease forwards;
+    animation-delay: 1.6s;
 }
 
-@keyframes loading {
-    0% { width: 0%; }
-    50% { width: 70%; }
-    100% { width: 100%; }
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
 }

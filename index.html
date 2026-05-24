@@ -5,298 +5,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hearthgrove • Survival SMP</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=Playfair+Display:wght@700&amp;display=swap');
-
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-        }
-
-        .heading {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-
-        .portal-bg {
-            background: 
-                linear-gradient(rgba(15, 26, 20, 0.78), rgba(15, 26, 20, 0.88)),
-                url('https://picsum.photos/id/1015/1920/1080');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-25px); }
-        }
-
-        .glow-gold {
-            text-shadow: 
-                0 0 15px #E8B86D,
-                0 0 30px #8B5E3C;
-        }
-
-        .portal-card {
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            background: rgba(26, 47, 31, 0.92);
-            border: 2px solid #3a4a3a;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .portal-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            border-color: #E8B86D;
-            box-shadow: 0 30px 60px -15px rgba(232, 184, 109, 0.25);
-        }
-
-        .portal-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 40%;
-            height: 200%;
-            background: linear-gradient(
-                120deg,
-                transparent,
-                rgba(255,255,255,0.35),
-                transparent
-            );
-            transform: skewX(-25deg);
-            transition: left 0.6s;
-        }
-
-        .portal-card:hover::before {
-            left: 150%;
-        }
-
-        .section-header {
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(to right, #E8B86D, #8B5E3C);
-            border-radius: 3px;
-        }
-
-        .minecraft-btn {
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .minecraft-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 40%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255,255,255,0.5),
-                transparent
-            );
-            transition: 0.6s;
-        }
-
-        .minecraft-btn:hover::after {
-            left: 300%;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="bg-[#0f1a14] text-white">
 
-    <!-- HERO SECTION -->
-    <div class="portal-bg min-h-screen flex flex-col items-center justify-center relative overflow-hidden">
-
-        <!-- Animated Floating Elements -->
-        <div class="absolute top-20 left-10 w-8 h-8 bg-[#E8B86D] rounded-full opacity-30 floating" style="animation-delay: 0s;"></div>
-        <div class="absolute top-40 right-16 w-5 h-5 bg-[#8B5E3C] rounded-full opacity-40 floating" style="animation-delay: 2s;"></div>
-        <div class="absolute bottom-32 left-24 w-6 h-6 bg-[#E8B86D] rounded-full opacity-20 floating" style="animation-delay: 4s;"></div>
-
-        <!-- Main Logo -->
-        <div class="text-center z-10 mb-12 px-6">
+    <!-- LOADING SCREEN -->
+    <div id="loading-screen" class="fixed inset-0 bg-[#0f1a14] z-[9999] flex items-center justify-center">
+        <div class="text-center">
             <div class="flex justify-center mb-6">
-                <div class="flex items-center gap-x-4">
-                    <div class="w-20 h-20 bg-gradient-to-br from-[#E8B86D] to-[#8B5E3C] rounded-3xl flex items-center justify-center shadow-2xl">
-                        <i class="fa-solid fa-tree text-5xl text-[#1a2f1f]"></i>
-                    </div>
-                    <div class="w-20 h-20 bg-gradient-to-br from-[#8B5E3C] to-[#E8B86D] rounded-3xl flex items-center justify-center shadow-2xl -mt-6">
-                        <i class="fa-solid fa-fire text-5xl text-white"></i>
-                    </div>
+                <div class="w-20 h-20 bg-gradient-to-br from-[#E8B86D] to-[#8B5E3C] rounded-3xl flex items-center justify-center animate-pulse">
+                    <i class="fa-solid fa-tree text-5xl text-[#1a2f1f]"></i>
                 </div>
             </div>
-
-            <h1 class="minecraft-text text-[92px] md:text-[120px] font-black tracking-[-6px] text-[#E8B86D] glow-gold leading-none">HEARTHGROVE</h1>
-            <p class="text-4xl text-white -mt-4 tracking-[6px] font-light">SURVIVAL SMP</p>
-            
-            <p class="mt-4 text-xl text-[#a8b9aa] max-w-md mx-auto">A cozy place to build, explore, and call home.</p>
-        </div>
-
-        <!-- Three Big Animated Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl px-6 z-10">
-            
-            <!-- Discord -->
-            <a href="#" class="portal-card group rounded-3xl p-10 flex flex-col items-center text-center">
-                <div class="w-28 h-28 bg-[#5865F2] rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-                    <i class="fa-brands fa-discord text-white text-7xl"></i>
-                </div>
-                <div class="text-3xl font-bold mb-2">Join Discord</div>
-                <div class="text-[#a8b9aa]">Be part of our growing family</div>
-            </a>
-
-            <!-- Vote -->
-            <a href="#" class="portal-card group rounded-3xl p-10 flex flex-col items-center text-center">
-                <div class="w-28 h-28 bg-[#E8B86D] rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-                    <i class="fa-solid fa-vote-yea text-[#1a2f1f] text-7xl"></i>
-                </div>
-                <div class="text-3xl font-bold mb-2">Vote for Us</div>
-                <div class="text-[#a8b9aa]">Help us grow &amp; get rewards</div>
-            </a>
-
-            <!-- Community / Events -->
-            <a href="#" class="portal-card group rounded-3xl p-10 flex flex-col items-center text-center">
-                <div class="w-28 h-28 bg-[#3a4a3a] rounded-3xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
-                    <i class="fa-solid fa-calendar text-[#E8B86D] text-7xl"></i>
-                </div>
-                <div class="text-3xl font-bold mb-2">Events &amp; Community</div>
-                <div class="text-[#a8b9aa]">Weekly events &amp; build contests</div>
-            </a>
-
-        </div>
-
-        <!-- Scroll Prompt -->
-        <div class="absolute bottom-12 hidden md:block text-center">
-            <div class="flex flex-col items-center text-[#a8b9aa]">
-                <span class="text-sm tracking-[2px]">SCROLL TO EXPLORE</span>
-                <i class="fa-solid fa-chevron-down text-xl mt-2 animate-bounce"></i>
+            <div class="text-3xl font-bold text-[#E8B86D]">Loading Hearthgrove...</div>
+            <div class="mt-4 w-64 h-1 bg-[#3a4a3a] rounded-full mx-auto overflow-hidden">
+                <div class="h-full bg-[#E8B86D] animate-[loading_1.5s_ease-in-out_infinite]"></div>
             </div>
         </div>
     </div>
 
-    <!-- ABOUT SECTION -->
-    <div class="max-w-5xl mx-auto px-6 py-24">
-        <div class="text-center mb-16">
-            <div class="inline-block px-6 py-1.5 rounded-3xl bg-[#E8B86D]/10 text-[#E8B86D] text-sm font-semibold tracking-widest mb-4">OUR STORY</div>
-            <h2 class="text-6xl font-bold tracking-tighter heading">A place to truly belong.</h2>
-        </div>
+    <!-- MAIN CONTENT -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-700">
 
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-            <div class="space-y-6 text-lg text-[#c5d5c8]">
-                <p>Hearthgrove is more than just a server — it's a home. We focus on long-term survival, beautiful builds, and a warm, welcoming community.</p>
-                <p>Built on a custom terrain generator with rolling hills, lush forests, and cozy biomes designed for creativity and peace.</p>
-            </div>
+        <!-- Hero Section -->
+        <div class="min-h-screen bg-cover bg-center flex flex-col items-center justify-center relative" 
+             style="background-image: linear-gradient(rgba(15,26,20,0.85), rgba(15,26,20,0.9)), url('https://picsum.photos/id/1015/1920/1080')">
             
-            <div class="bg-[#1a2f1f] p-10 rounded-3xl border border-[#3a4a3a]">
-                <div class="flex items-center gap-x-4 mb-6">
-                    <div class="text-5xl">🌲</div>
-                    <div>
-                        <div class="text-2xl font-semibold">Since 2025</div>
-                        <div class="text-[#a8b9aa]">Growing together</div>
+            <div class="text-center px-6">
+                <div class="flex justify-center mb-8">
+                    <div class="flex items-center gap-x-5">
+                        <div class="w-24 h-24 bg-gradient-to-br from-[#E8B86D] to-[#8B5E3C] rounded-3xl flex items-center justify-center shadow-2xl">
+                            <i class="fa-solid fa-tree text-6xl text-[#1a2f1f]"></i>
+                        </div>
+                        <div class="w-24 h-24 bg-gradient-to-br from-[#8B5E3C] to-[#E8B86D] rounded-3xl flex items-center justify-center shadow-2xl -mt-8">
+                            <i class="fa-solid fa-fire text-6xl text-white"></i>
+                        </div>
                     </div>
                 </div>
-                <div class="text-sm text-[#a8b9aa]">No resets. No pay-to-win. Just pure survival and good vibes.</div>
-            </div>
-        </div>
-    </div>
 
-    <!-- FEATURES -->
-    <div class="bg-[#16261e] py-20">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-6xl font-bold tracking-tighter">What makes Hearthgrove special</h2>
+                <h1 class="text-[100px] md:text-[130px] font-black tracking-[-6px] text-[#E8B86D]">HEARTHGROVE</h1>
+                <p class="text-4xl -mt-4 text-white tracking-[4px]">SURVIVAL SMP</p>
+                
+                <p class="mt-6 max-w-md mx-auto text-xl text-[#b8c9b9]">A cozy place to build, explore, and belong.</p>
             </div>
 
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="bg-[#1a2f1f] p-8 rounded-3xl border border-[#3a4a3a]">
-                    <i class="fa-solid fa-mountain text-4xl text-[#E8B86D] mb-6"></i>
-                    <div class="text-2xl font-semibold mb-2">Beautiful World</div>
-                    <p class="text-[#a8b9aa]">Custom terrain with rolling hills and stunning biomes.</p>
-                </div>
-                <div class="bg-[#1a2f1f] p-8 rounded-3xl border border-[#3a4a3a]">
-                    <i class="fa-solid fa-users text-4xl text-[#E8B86D] mb-6"></i>
-                    <div class="text-2xl font-semibold mb-2">Friendly Community</div>
-                    <p class="text-[#a8b9aa]">Mature players who actually help each other.</p>
-                </div>
-                <div class="bg-[#1a2f1f] p-8 rounded-3xl border border-[#3a4a3a]">
-                    <i class="fa-solid fa-calendar text-4xl text-[#E8B86D] mb-6"></i>
-                    <div class="text-2xl font-semibold mb-2">Weekly Events</div>
-                    <p class="text-[#a8b9aa]">Build contests, treasure hunts &amp; more.</p>
-                </div>
-                <div class="bg-[#1a2f1f] p-8 rounded-3xl border border-[#3a4a3a]">
-                    <i class="fa-solid fa-infinity text-4xl text-[#E8B86D] mb-6"></i>
-                    <div class="text-2xl font-semibold mb-2">No Resets</div>
-                    <p class="text-[#a8b9aa]">Build your legacy and come back anytime.</p>
-                </div>
+            <!-- 3 Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl px-6 mt-16">
+                <a href="#" class="v2-card bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-9 text-center">
+                    <div class="w-20 h-20 bg-[#5865F2] rounded-3xl mx-auto flex items-center justify-center mb-6">
+                        <i class="fa-brands fa-discord text-white text-5xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold">Discord</div>
+                </a>
+                
+                <a href="#" class="v2-card bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-9 text-center">
+                    <div class="w-20 h-20 bg-[#E8B86D] rounded-3xl mx-auto flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-vote-yea text-[#1a2f1f] text-5xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold">Vote</div>
+                </a>
+                
+                <a href="#" class="v2-card bg-[#1a2f1f] border border-[#3a4a3a] rounded-3xl p-9 text-center">
+                    <div class="w-20 h-20 bg-[#3a4a3a] rounded-3xl mx-auto flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-calendar text-[#E8B86D] text-5xl"></i>
+                    </div>
+                    <div class="text-3xl font-bold">Events</div>
+                </a>
             </div>
         </div>
-    </div>
 
-    <!-- BOTTOM JOIN BAR -->
-    <div class="bg-[#1a2f1f] py-8 border-t border-[#3a4a3a]">
-        <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-y-6">
-            <div class="text-center md:text-left">
-                <div class="text-xl">Ready to find your new home?</div>
-                <div class="text-4xl font-bold text-[#E8B86D]">play.hearthgrove.net</div>
+        <!-- Bottom Join Bar -->
+        <div class="bg-[#1a2f1f] py-8 border-t border-[#3a4a3a]">
+            <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-y-5">
+                <div>
+                    <div class="text-xl">Ready to come home?</div>
+                    <div class="font-mono text-4xl text-[#E8B86D]">hg.dg.vg</div>
+                </div>
+                
+                <button onclick="copyIP()" 
+                        class="flex items-center gap-x-3 bg-[#E8B86D] hover:bg-[#d4a75a] text-[#1a2f1f] px-10 py-4 rounded-3xl font-bold text-xl transition-all active:scale-95">
+                    <span>Join Now</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
             </div>
-            
-            <button onclick="copyIP()" 
-                    class="minecraft-btn group flex items-center gap-x-3 bg-[#E8B86D] hover:bg-[#d4a75a] text-[#1a2f1f] px-10 py-4 rounded-3xl font-bold text-xl transition-all active:scale-[0.97]">
-                <span>Join Now</span>
-                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
-            </button>
         </div>
+
     </div>
 
     <!-- Toast -->
-    <div id="toast" class="hidden fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#1a2f1f] border border-[#E8B86D] px-8 py-3.5 rounded-2xl flex items-center gap-x-3 shadow-2xl">
+    <div id="toast" class="hidden fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#1a2f1f] border border-[#E8B86D] px-8 py-3.5 rounded-2xl flex items-center gap-x-3 z-50">
         <i class="fa-solid fa-check text-[#E8B86D]"></i>
-        <span class="font-medium">IP copied to clipboard!</span>
+        <span>IP copied to clipboard!</span>
     </div>
 
-    <script>
-        function copyIP() {
-            const ip = "play.hearthgrove.net";
-            navigator.clipboard.writeText(ip).then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.remove('hidden');
-                toast.classList.add('flex');
-                
-                setTimeout(() => {
-                    toast.classList.remove('flex');
-                    toast.classList.add('hidden');
-                }, 2300);
-            }).catch(() => {
-                prompt("Copy this IP:", ip);
-            });
-        }
-
-        // Add subtle floating animation to cards on load
-        window.onload = function() {
-            const cards = document.querySelectorAll('.portal-card');
-            cards.forEach((card, index) => {
-                card.style.animation = `float 4s ease-in-out ${index * 0.3}s infinite`;
-            });
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
